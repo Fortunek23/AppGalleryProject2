@@ -1,0 +1,42 @@
+﻿@model SharedViewModel
+@{
+    ViewData["Title"] = "Shared";
+}
+
+            <div class="row">
+                @if (Model.sharedWithMeList != null)
+                {
+                    foreach (var item in Model.sharedWithMeList)
+                    {
+                        <div class="col-sm-2">
+                            <a href="@Url.Content("~/photography/"+item.Name)" data-toggle="lightbox" data-title="sample 1 - white" data-gallery="gallery">
+                                <img src="~/photography/@item.Name" asp-append-version="true" class="img-fluid mb-2" alt="white sample">
+                            </a>
+                            <a href="@Url.Action("DeletePhoto","photo",new { id=item.PhotoId})" style="float:right">Delete</a>
+                            
+                        </div>
+                    }
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script>
+
+        $(function () {
+            $(document).on('click', '[data-toggle="lightbox"]', function (event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
+            });
+        });
+
+
+    </script>
+}
